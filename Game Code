@@ -1,16 +1,17 @@
 import math
+import random
     
 def ringroad():
     program = input("Choose a program to start off with: ENBUS, SE, or AFM: ")
-    if program == "ENBUS":
-        return status(120,0,70,0,0)
-    elif program == "SE":
-            return status(100,0,75,0,0) 
+    if program == 'ENBUS':
+        return status(120,0,70,0)
+    elif program == 'SE':
+            return status(100,0,75,0) 
     else:
-        return status(100,50,70,0,0)
+        return status(100,50,70,0)
 
 def status(H,W,G,A):
-    print ("Health: "+ H + "\nWatcard: $" + W + "\nGrade: " + G + "\nAttractiveness: " + A)
+    print ("Health: "+ str(H) + "\nWatcard: $" + str(W) + "\nGrade: " + str(G) + "\nAttractiveness: " + str(A))
 
 def qnc():
     answer = input("Go into the lab? Y/N ")
@@ -105,6 +106,9 @@ def plaza():
     
 def gameplay(H,W,G,A,C):
     ringroad()
+    H = 100
+    W = 0
+    G = 70    
     while not (H == 10 or (H>0 and W>100 and A>1 and C==140)):
         if C == 10:
             hh()
@@ -117,19 +121,80 @@ def gameplay(H,W,G,A,C):
         elif C == 50:
             stc()        
         elif C == 60:
-            qnc()        
+            answer = input("Go into the lab? Y/N ")
+            if answer == 'Y':
+                cont = random.uniform(0,1)
+                if cont == 0:
+                    print("Congrats.You've succefully finished the lab!")
+                    status(H,W,G,A)
+                else:
+                    H = H - 20
+                    G = G + 1
+                    print("Oh no! While conducting the lab, you got a biochem contamination!")
+                    status(H,W,G,A)
+            else:
+                print("Okay we'll keep walking.")                    
         elif C == 70:
-            v1()
+            print("You are taking a stroll around V1.")
+            cont = random.uniform(0,1)
+            if cont == 0:
+                print("The air smells like geese poop. But it's still a nice day.")
+                status(H,W,G,A)
+            else:
+                H = H - 50
+                print("YOU HAVE BEEN STIKED BY LIGHTNING! What are the chances!?")
+                status(H,W,G,A)            
         elif C == 80:
-            slc()
+            answer = input("PARTTTYYYYYY at bomber? Y/N ")
+            if answer == 'Y':
+                cont = random.uniform(0,1)
+                if cont == 0:
+                    G = G - 5
+                    A = A + 1
+                    print("DAAAMMMMNN. You got hit on!")
+                    status(H,W,G,A)
+                else:
+                    print("No one noticed you, I guess it's time to go.")
+                    status(H,W,G,A)
+            else:
+                print("Okay we'll keep walking.")            
         elif C == 90:
-            pac()
+            answer = input("Get swole? Y/N ")
+            if answer == 'Y':
+                print("Awesome, pick up some weights and lift.")
+                G = G - 5
+                A = A + 1
+                H = H + 20
+                status(H,W,G,A)
+            else:
+                print("Okay we'll keep walking.")            
         elif C == 100:
-            ahs()
+            answer = input("Hookup at the AFM headquaters? Y/N ")
+            if answer == 'Y':
+                print("Alright, take a detour to Phils and geeeet some.")
+                W = W - 50
+                H = H + 50
+                status(H,W,G,A)
+            else:
+                print("Okay we'll keep walking.")            
         elif C == 110:
-            dc()
+            answer = input("Talk to your instructor? Y/N ")
+            if answer == 'Y':
+                G = G + 5
+                status(H,W,G,A)
+            else:
+                print("Okay we'll keep walking.")            
         elif C == 120:
-            e5()    
+            print("AYYYY engineers!\n Now thirsty engineering guys are trying to hassle you with dank memes")
+            A = A - 2    
+            status(H,W,G,A)                
         elif C == 130:
-            plaza()
+            answer = input("Good smeels waft over, go to the plaza? Y/N ")
+            if answer == 'Y':
+                W = W - 10
+                H = H - 90
+                print("Food poisoning at Mr.Paninos. Tough luck.")
+                status(H,W,G,A)
+            
         C = C + 10
+        
